@@ -1,0 +1,121 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger Petstore",
+        "version": "1.0.0",
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "post": {
+                "requestBody": {
+                    "description": "Holds UserModel\n",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserModel"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Success/failure"
+                    }
+                },
+                "operationId": "saveUser",
+                "summary": "Post Api to save users",
+                "description": "Post Api to save users"
+            }
+        },
+        "/users/{userId}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "holds userId\n",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserModel"
+                                }
+                            }
+                        },
+                        "description": "UserModel details"
+                    }
+                },
+                "operationId": "getUserById",
+                "summary": "get Api to fetch the user details by id",
+                "description": "get Api to fetch the user details by id"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Error": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UserModel": {
+                "description": "Holds UserModel details",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Holds name details",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Holds Email details",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "some text",
+                    "email": "some text"
+                }
+            }
+        }
+    }
+}
